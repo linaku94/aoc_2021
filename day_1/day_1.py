@@ -18,8 +18,6 @@ with open(filename, 'r') as file:
     for line in file:
         depths.append(int(line.rstrip()))
 
-### first part
-print(f'first part: {depth_increases(depths)}')
-
-## second part
-print(f'second part: {depth_increases(window_sum(depths))}')
+### first/second part
+print(f'first part: {depth_increases(depths)}'
+      f'\nsecond part: {depth_increases(window_sum(depths))}')
