@@ -12,7 +12,6 @@ def window_sum(depths):                ### sum windows
     return new_depths
 
 filename = 'input.txt'
-# file = open(filename, 'r')
 
 depths = []
 with open(filename, 'r') as file:
@@ -20,7 +19,7 @@ with open(filename, 'r') as file:
         depths.append(int(line.rstrip()))
 
 ### first part
-print('first part:', depth_increases(depths))
+print(f'first part: {depth_increases(depths)}')
 
 ## second part
-print('second part:', depth_increases(window_sum(depths)))
+print(f'second part: {depth_increases(window_sum(depths))}')
