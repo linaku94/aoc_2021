@@ -2,7 +2,7 @@ import time
 from day_1 import depth_increases, window_sum
 
 # runs = int(input('number of runs: '))
-runs = 100
+runs = 1000
 
 filename = 'input.txt'
 
