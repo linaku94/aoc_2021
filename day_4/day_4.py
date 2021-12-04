@@ -12,11 +12,10 @@ def play_game(boards, masks, draws):
             winning_board = np.where(np.all(masks, axis=win_axs) ==True )[0][0]
             winning_mask = np.squeeze(np.invert(masks[winning_board]))
             winning_sum = boards[winning_board,winning_mask].sum(dtype = np.int)
-            winning_draw = draw
             # print(f'winner with draw {draw} and sum {winning_sum*winning_draw}')
             boards = np.delete(boards, winning_board, axis = 0)
             masks = np.delete(masks, winning_board, axis = 0)
-            return(winning_sum * winning_draw, boards, masks, draws[i:])
+            return(winning_sum * draw, boards, masks, draws[i:])
 
 
 boards = np.zeros((500,5))
