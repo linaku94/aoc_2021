@@ -5,13 +5,9 @@ def lines(x,y, diagonals = False):
     coordinates = np.zeros((1000,1000), dtype = np.int)
     for i, test in enumerate(x[:,0]):
         if x[i,0] == x[i,1]:
-            start = y[i,:].min()
-            stop = y[i,:].max()
-            coordinates[x[i,0], start:stop+1] += 1
+            coordinates[x[i,0], y[i,:].min():y[i,:].max()+1] += 1
         elif y[i,0] == y[i,1]:
-            start = x[i,:].min()
-            stop = x[i,:].max()
-            coordinates[start:stop+1, y[i,0]] += 1
+            coordinates[x[i,:].min():x[i,:].max()+1, y[i,0]] += 1
         elif diagonals:
             X = np.arange(x[i,:].min(),x[i,:].max()+1)
             Y = np.arange(y[i,:].min(),y[i,:].max()+1)
