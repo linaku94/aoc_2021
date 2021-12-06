@@ -1,6 +1,4 @@
-from typing import final
 import numpy as np
-from numpy.core.numeric import full
 
 def fish(states, days):
     for i in range(days):
