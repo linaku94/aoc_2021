@@ -1,4 +1,3 @@
-import enum
 import numpy as np 
 
 def fuel(init_state):
