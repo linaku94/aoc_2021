@@ -25,14 +25,13 @@ with open('input.txt', 'r') as file:
         for k, num in enumerate(line):
             matrix[i,k] = int(num)
 
-print(risk_level(matrix))
-r = matrix != 9
-mask, nums = label(r)
-basins = np.zeros((nums), dtype = np.int)
-for i in range(nums):
-    b_sum = np.count_nonzero(mask == i+1)
-    basins[i] = b_sum
+### first part
+print(f'risk level: {risk_level(matrix)}')
 
+### second part 
+mask = matrix != 9
+mask, nums = label(mask)
+basins = np.array([np.count_nonzero(mask == i+1) for i in range(nums)])
 result = np.sort(basins)[-3:]
-print(np.prod(result))  
+print(f'largest basins {np.prod(result)}')  
 
