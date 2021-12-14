@@ -1,35 +1,18 @@
-def polymerization(old_state, rules, steps):
+def polymerization(old_state, rules_split, steps):
     for step in range(steps):
-        state = empty_state(old_state)
+        new_state = {x: 0 for x in old_state.keys()}
         for key in old_state.keys():
-            pols = list(key)
-            np0 = pols[0]+rules[key]
-            np1 = rules[key] + pols[1]
-            state[np0] += old_state[key]
-            state[np1] += old_state[key]
-        old_state = state
-    return state
-
-
-def elements(state):
-    elements = {}
-    for key in state.keys():
-        vals = list(key)
-        for val in vals:
-            if val in elements:
-                elements[val] += state[key]
-            else:
-                elements[val] = state[key]
-    for key in elements.keys():
-        if elements[key]%2 == 0:
-            elements[key] = int(elements[key]/2)
-        else:
-            elements[key] = int((elements[key]+1)/2)
-    return elements
-
-
-def empty_state(state):
-    return {x:0 for x in state.keys()}
+            np0 = key[0]+rules_split[key]
+            np1 = rules_split[key] + key[1]
+            new_state[np0] += old_state[key]
+            new_state[np1] += old_state[key]
+        old_state = new_state
+    elems = {i: 0 for i in set("".join([i for i in new_state.keys()]))}
+    for key in new_state.keys():
+        for val in key:
+            elems[val] += new_state[key]
+    elems = {key: value // 2 for key, value in elems.items()}
+    return elems
 
 
 with open('input.txt', 'r') as file:
@@ -38,14 +21,9 @@ with open('input.txt', 'r') as file:
     state = {}
     rules = {}
     for line in lines[2:]:
-        line = line.rstrip()
-        values = line.split(' -> ')
+        values = line.rstrip().split(" -> ")
         rules[values[0]] = values[1]
-        if values[0] in polymer:
-            state[values[0]] = 1
-        else:
-            state[values[0]] = 0
+        state[values[0]] = 1 if values[0] in polymer else 0
 
-state = polymerization(state, rules, 40)
-result = elements(state)
-print(max(result.values())-min(result.values()))
+result = polymerization(state, rules, 40)
+print(max(result.values())-min(result.values()) + 1)
