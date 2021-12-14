@@ -1,18 +1,15 @@
-import copy 
-
 def polymerization(old_state, rules, steps):
     for step in range(steps):
-        state = copy.deepcopy(old_state)
-        for key in state.keys():
-            state[key] = 0
+        state = empty_state(old_state)
         for key in old_state.keys():
             pols = list(key)
             np0 = pols[0]+rules[key]
             np1 = rules[key] + pols[1]
             state[np0] += old_state[key]
             state[np1] += old_state[key]
-        old_state = copy.deepcopy(state)
+        old_state = state
     return state
+
 
 def elements(state):
     elements = {}
@@ -29,6 +26,14 @@ def elements(state):
         else:
             elements[key] = int((elements[key]+1)/2)
     return elements
+
+
+def empty_state(state):
+    empty_state = {}
+    for key in state.keys():
+        empty_state[key] = 0
+    return empty_state
+
 
 with open('input.txt', 'r') as file:
     lines = file.readlines()
