@@ -29,10 +29,7 @@ def elements(state):
 
 
 def empty_state(state):
-    empty_state = {}
-    for key in state.keys():
-        empty_state[key] = 0
-    return empty_state
+    return {x:0 for x in state.keys()}
 
 
 with open('input.txt', 'r') as file:
